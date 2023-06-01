@@ -40,7 +40,12 @@ const links = [
 const Navbar = () => {
 	return (
 		<div className={styles.container}>
-			<Link href="/">Animia</Link>
+			<Link
+				href="/"
+				classNmae={styles.logo}
+			>
+				Animia
+			</Link>
 			<div className={styles.links}>
 				{links.map((link) => (
 					<Link
@@ -50,7 +55,12 @@ const Navbar = () => {
 						{link.title}
 					</Link>
 				))}
-				<button onClick={() => console.log("Logout")}>Logout</button>
+				<button
+					className={styles.logout}
+					onClick={() => console.log("Logged out")}
+				>
+					Logout
+				</button>
 			</div>
 		</div>
 	);
