@@ -17,11 +17,11 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={poppins.className}>
-				<dicv className="container">
+				<div className="container">
 					<Navbar />
 					{children}
 					<Footer />
-				</dicv>
+				</div>
 			</body>
 		</html>
 	);
