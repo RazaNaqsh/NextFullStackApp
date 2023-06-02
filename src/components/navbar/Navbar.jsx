@@ -42,7 +42,7 @@ const Navbar = () => {
 		<div className={styles.container}>
 			<Link
 				href="/"
-				classNmae={styles.logo}
+				className={styles.logo}
 			>
 				Animia
 			</Link>
