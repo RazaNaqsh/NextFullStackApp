@@ -1,14 +1,26 @@
 import React from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
+import { notFound } from "next/navigation";
+async function getData(id) {
+	const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+		cache: "no-store",
+	});
 
-const BlogPost = () => {
+	if (!res.ok) {
+		return notFound();
+	}
+
+	return res.json();
+}
+const BlogPost = async ({ params }) => {
+	const data = await getData(params.id);
 	return (
 		<div className={styles.container}>
 			<div className={styles.top}>
 				<div className={styles.info}>
-					<h1 className={styles.title}>title</h1>
-					<p className={styles.desc}>Desc</p>
+					<h1 className={styles.title}>{data.title}</h1>
+					<p className={styles.desc}>desc</p>
 					<div className={styles.author}>
 						<Image
 							src="https://images.pexels.com/photos/2103127/pexels-photo-2103127.jpeg"
@@ -30,13 +42,7 @@ const BlogPost = () => {
 				</div>
 			</div>
 			<div className={styles.content}>
-				<p className={styles.text}>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis
-					dolores, vitae minima tempora aliquid sunt unde, hic quae veniam rerum
-					vel quisquam ad dolore fugit aspernatur inventore impedit totam nemo
-					maiores deleniti assumenda, ipsa blanditiis sint a. Iusto natus, ullam
-					fugit atque facilis omnis dolorum unde aspernatur ipsam ut laborum.
-				</p>
+				<p className={styles.text}>{data.body}</p>
 			</div>
 		</div>
 	);
