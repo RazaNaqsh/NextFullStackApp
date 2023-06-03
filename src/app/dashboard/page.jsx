@@ -32,7 +32,7 @@ const Dashboard = () => {
 
 	const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-	const { data, error, isLoading } = useSWR(
+	const { data, mutate, error, isLoading } = useSWR(
 		`/api/posts?username=${session?.data?.user.name}`,
 		fetcher
 	);
@@ -64,8 +64,19 @@ const Dashboard = () => {
 					username: session.data.user.name,
 				}),
 			});
-			// mutate();
-			// e.target.reset();
+			mutate();
+			e.target.reset();
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const handleDelete = async (id) => {
+		try {
+			await fetch(`/api/posts/${id}`, {
+				method: "DELETE",
+			});
+			mutate();
 		} catch (err) {
 			console.log(err);
 		}
