@@ -21,7 +21,7 @@ const Login = () => {
 	if (session.status == "loading") {
 		return <p>Loading..</p>;
 	}
-	if (session.status == "loading") {
+	if (session.status == "authenticated") {
 		router?.push("/dashboard");
 	}
 
