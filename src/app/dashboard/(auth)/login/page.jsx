@@ -1,5 +1,5 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import React, { useState } from "react";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
@@ -9,6 +9,8 @@ const Login = () => {
 
 	const router = useRouter();
 
+	const session = useSession();
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const email = e.target[0].value;
@@ -16,6 +18,12 @@ const Login = () => {
 
 		signIn("credentials", { email, password });
 	};
+	if (session.status == "loading") {
+		return <p>Loading..</p>;
+	}
+	if (session.status == "loading") {
+		router?.push("/dashboard");
+	}
 
 	return (
 		<div className={styles.container}>
